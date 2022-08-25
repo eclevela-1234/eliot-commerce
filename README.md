@@ -4,6 +4,8 @@
 
 **This is a backend only project utilizing Node, Express, Sequelize and of course MySql. The project showcases RESTful API CRUD methods via local server endpoints using the Sequelize ORM. Completeling this assignment helped solidify RESTful concepts and deepened my understanding of ORMs.**
 
+![screenshot](./assets/images/screenshot.png)
+
 ## Table of Contents
 
 
