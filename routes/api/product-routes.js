@@ -28,7 +28,7 @@ router.get("/:id", (req, res) => {
   })
     .then((Data) => {
       if (!Data) {
-        res.status(404).json({ message: "No post category with this id!" });
+        res.status(404).json({ message: "No product with this id!" });
         return;
       }
       res.json(Data);
@@ -115,6 +115,22 @@ router.put("/:id", (req, res) => {
 
 router.delete("/:id", (req, res) => {
   // delete one product by its `id` value
+  Product.destroy({
+    where: {
+      id: req.params.id,
+    },
+  })
+    .then((Data) => {
+      if (!Data) {
+        res.status(404).json({ message: "No Product with this id" });
+        return;
+      }
+      res.json(Data);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 module.exports = router;
