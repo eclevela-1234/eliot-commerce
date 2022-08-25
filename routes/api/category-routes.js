@@ -33,7 +33,7 @@ router.get("/:id", (req, res) => {
   })
     .then((Data) => {
       if (!Data) {
-        res.status(404).json({ message: "No post category with this id!" });
+        res.status(404).json({ message: "No category with this id!" });
         return;
       }
       res.json(Data);
