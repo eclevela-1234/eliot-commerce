@@ -12,7 +12,7 @@ router.get("/", (req, res) => {
       },
     ],
   })
-    .then((dbUserData) => res.json(dbUserData))
+    .then((Data) => res.json(Data))
     .catch((err) => {
       console.log(err);
       res.status(500).json(err);
@@ -31,12 +31,12 @@ router.get("/:id", (req, res) => {
       },
     ],
   })
-    .then((dbPostData) => {
-      if (!dbPostData) {
+    .then((Data) => {
+      if (!Data) {
         res.status(404).json({ message: "No post category with this id!" });
         return;
       }
-      res.json(dbPostData);
+      res.json(Data);
     })
     .catch((err) => {
       console.log(err);
@@ -49,7 +49,7 @@ router.post("/", (req, res) => {
   Category.create({
     category_name: req.body.category_name
   })
-  .then((dbPostData) => res.json(dbPostData))
+  .then((Data) => res.json(Data))
   .catch((err) => {
     console.log(err);
     res.status(500).json(err);
@@ -58,10 +58,45 @@ router.post("/", (req, res) => {
 
 router.put("/:id", (req, res) => {
   // update a category by its `id` value
+  Category.update(
+    { category_name: req.body.category_name },
+    {
+      where: {
+        id: req.params.id,
+      },
+    }
+  )
+    .then((Data) => {
+      if (!Data) {
+        res.status(404).json({ message: "No category found with this id!" });
+        return;
+      }
+      res.json(Data);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 router.delete("/:id", (req, res) => {
   // delete a category by its `id` value
+  Category.destroy({
+    where: {
+      id: req.params.id,
+    },
+  })
+    .then((Data) => {
+      if (!Data) {
+        res.status(404).json({ message: "No category with this id" });
+        return;
+      }
+      res.json(Data);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 module.exports = router;
